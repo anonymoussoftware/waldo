@@ -1,0 +1,741 @@
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 2))#
+}
+conda list
+install.packages('tidyverse')
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 2))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 20#
+B_power <- 10000000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA,B)#
+  wald_not_stand <- rep(NA,B)#
+  for(bb in 1:B)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data))#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 2))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 20#
+B_power <- 10000000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data))#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+B_power <- 100000
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 2))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 20#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data))#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 2))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 20#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 2))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 20#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 20#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 1#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 1#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+quantile(c(1), probs=0.95)
+quantile(1, probs=0.95)
+rt(n,df = 3)
+rt(n,df = 3)
+rt(n,df = 3)
+rt(n,df = 3)
+mean(rt(n,df = 3))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t	#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 10000#
+par_grid <- seq(-10,10,length.out=1000) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t	#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 10000#
+par_grid <- seq(-10,10,length.out=1000) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <-(mean(data)**2)/(var(data)/n)#
+    wald_not_stand[bb] <-(mean(data)**2)#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 100000#
+par_grid <- seq(0,1,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 100000#
+par_grid <- seq(0,10,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+seq(0, 10 length.out=20)
+seq(0, 10,length.out=20)
+seq(-10, 10,length.out=20)
+prm_grd = seq(-10, 10,length.out=20)
+prm_grd
+seq_along(prm_grd)
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 100000#
+par_grid <- seq(-10,10,length.out=20) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 100000#
+par_grid <- c(0, seq(-10,10,length.out=20)) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 2#
+B_power <- 100000#
+par_grid <- c(0, seq(-10,10,length.out=20)) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data))#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
+library(tidyverse)#
+normal <- function(n,par=0)#
+{#
+  return(rnorm(n,mean=par))#
+}#
+#
+t <- function(n,par=0)#
+{#
+  return(par+rt(n,df = 3))#
+}#
+generator <- t#
+#
+alpha <- 0.05#
+n <- 10#
+B_power <- 100000#
+par_grid <- c(0, seq(-10,10,length.out=40)) # first one must be the null value, which must be zero#
+cutoff_stand <- rep(NA,length(par_grid))#
+cutoff_not_stand=cutoff_stand#
+power_stand=cutoff_stand#
+power_not_stand=cutoff_stand#
+for(ii in seq_along(par_grid))#
+{#
+  print(ii/length(par_grid))#
+  wald_stand <- rep(NA, B_power)#
+  wald_not_stand <- rep(NA, B_power)#
+  for(bb in 1: B_power)#
+  {#
+    data <- generator(n,par=par_grid[ii])#
+    wald_stand[bb] <- abs(mean(data))/sqrt(var(data)/n)#
+    wald_not_stand[bb] <- abs(mean(data))#
+  } #
+  cutoff_stand[ii] <- quantile(wald_stand,probs = 1-alpha)#
+  cutoff_not_stand[ii] <- quantile(wald_not_stand,probs = 1-alpha)#
+  power_stand[ii] <- mean(wald_stand>=cutoff_stand[1])#
+  power_not_stand[ii] <- mean(wald_not_stand>=cutoff_not_stand[1])#
+}#
+data_plot <- data.frame(Method=rep(c("Wald","Unstandardized Wald"),#
+                                   each=length(power_stand)),#
+                        Power=c(power_stand,power_not_stand),#
+                        mu=par_grid)#
+ggplot(data_plot)+#
+  geom_line(aes(x=mu,y=Power,col=Method))
